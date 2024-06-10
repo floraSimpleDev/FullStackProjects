@@ -1,6 +1,9 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import "dotenv/config";
+import mongoose from "mongoose";
+
+mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string);
 
 //create an express app, make sure each express API be parsed into JSON type
 const app = express();
