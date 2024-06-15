@@ -1,4 +1,6 @@
 import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
+import * as apiClient from "../api-client";
 
 export type RegisterFormData = {
   firstName: string;
@@ -17,8 +19,20 @@ const Register = () => {
     formState: { errors },
   } = useForm<RegisterFormData>();
 
+  //handle modify api-client.register
+  const mutation = useMutation(apiClient.register, {
+    onSuccess: () => {
+      console.log("registration succesful!");
+    },
+    //responseBody.message, !response.ok error of api-client.ts
+    onError: (error: Error) => {
+      console.log(error.message);
+    },
+  });
+
+  //pass data to mutation function
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    mutation.mutate(data);
   });
 
   //md:flex-row for mobile screen
