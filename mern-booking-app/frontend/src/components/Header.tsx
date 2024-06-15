@@ -5,7 +5,7 @@ import { RxEnter } from "react-icons/rx";
 const Header = () => {
   return (
     <nav className="bg-[#493e99] py-6">
-      <menu className="container mx-auto flex justify-between px-40">
+      <menu className="container mx-auto flex justify-between px-40 sm:px-20 sm:flex-wrap">
         <li className="flex items-center gap-3 text-3xl text-[#f09d7c] font-bold -tracking-tighter cursor-pointer">
           <FaUniversalAccess />
           <Link to="/">Azure Heaven</Link>

@@ -3,8 +3,8 @@ import apartment from "../assets/apartment.svg";
 const Hero = () => {
   return (
     <section className="py-16 bg-[#493e99] flex justify-center">
-      <div className="container flex justify-between flex-wrap">
-        <article className="container mx-auto flex flex-col gap-2 pl-40 w-1/2">
+      <div className="container flex justify-between flex-wrap md:flex-col md:gap-6 sm:flex-col">
+        <article className="container mx-auto flex flex-col gap-2 pl-40 w-1/2 md:w-full md:px-40 sm:w-full sm:px-20">
           <h1 className="text-5xl text-white font-bold pb-10">
             Find your next hotel with Azure Heaven
           </h1>
@@ -15,7 +15,8 @@ const Hero = () => {
             your budget.
           </p>
         </article>
-        <figure className="w-1/2 pr-40 flex justify-end">
+
+        <figure className="w-1/2 pr-40 flex justify-end md:w-full sm:hidden">
           <img
             src={apartment}
             alt="apartment title image"
