@@ -16,7 +16,7 @@ const Toast = ({ message, type, onClose }: ToastProps) => {
     return () => {
       clearTimeout(timer);
     };
-  });
+  }, [onClose]);
 
   //different types of styles
   const styles =
