@@ -3,6 +3,7 @@ import { check, validationResult } from "express-validator";
 import User from "../models/user";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import verifyToken from "../middleware/auth";
 
 const router = express.Router();
 
@@ -60,6 +61,7 @@ router.post(
 
 //check the http cookie, if token is valid, send back 200 and the userId of that token
 router.get("validate-token", verifyToken, (req: Request, res: Response) => {
+  //get from the auth.ts of middleware folder: req.userId = (decoded as JwtPayload).userId;
   res.status(200).send({ userId: req.userId });
 });
 
