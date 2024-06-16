@@ -11,7 +11,12 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string);
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); //qs library
-app.use(cors()); //cross origin resource sharing
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+  })
+); //cross origin resource sharing
 
 //test code to make sure the express app API is ok.
 /* app.get("/api/test", async (req: Request, res: Response) => {
