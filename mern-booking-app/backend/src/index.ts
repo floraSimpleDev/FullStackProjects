@@ -4,11 +4,14 @@ import "dotenv/config";
 import mongoose from "mongoose";
 import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
+import cookieParser from "cookie-parser";
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string);
 
 //create an express app, make sure each express API be parsed into JSON type
 const app = express();
+//use cookie-parser
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); //qs library
 app.use(
