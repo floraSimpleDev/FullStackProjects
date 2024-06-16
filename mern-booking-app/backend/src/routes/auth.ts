@@ -7,6 +7,7 @@ import verifyToken from "../middleware/auth";
 
 const router = express.Router();
 
+//post user's email and password to login
 router.post(
   "/login",
   [
@@ -24,6 +25,7 @@ router.post(
 
     const { email, password } = req.body;
 
+    //find user based on the email
     try {
       const user = await User.findOne({ email });
 
@@ -31,6 +33,7 @@ router.post(
         return res.status(400).json({ message: "Invalid Credentials" });
       }
 
+      //compare the password
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
         return res
@@ -38,6 +41,7 @@ router.post(
           .json({ message: "Invalid Password Credentials" });
       }
 
+      //create the token and setting the expiresIn type
       const token = jwt.sign(
         { userId: user.id },
         process.env.JWT_SECRET_KEY as string,
@@ -46,6 +50,7 @@ router.post(
         }
       );
 
+      //transfer the auth_token to res.cookie
       res.cookie("auth_token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
