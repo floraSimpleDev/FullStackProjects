@@ -58,4 +58,9 @@ router.post(
   }
 );
 
+//check the http cookie, if token is valid, send back 200 and the userId of that token
+router.get("validate-token", verifyToken, (req: Request, res: Response) => {
+  res.status(200).send({ userId: req.userId });
+});
+
 export default router;
