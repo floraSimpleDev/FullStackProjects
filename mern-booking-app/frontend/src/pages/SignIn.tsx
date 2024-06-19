@@ -30,7 +30,7 @@ const SignIn = () => {
   });
 
   return (
-    <form className="flex flex-col gap-5">
+    <form className="flex flex-col gap-5" onSubmit={onSubmit}>
       <h2 className="text-3xl font-bold md:font-normal sm:text-sm sm:font-normal">
         Sign In
       </h2>
@@ -73,6 +73,15 @@ const SignIn = () => {
           <span className="text-red-400">{errors.password.message}</span>
         )}
       </label>
+
+      <span className="flex justify-end items-center">
+        <button
+          type="submit"
+          className="bg-[#493e99] text-[#f09d7c] p-3 font-bold text-lg rounded-xl hover:bg-[#f09d7c] hover:text-[#493e99] transition"
+        >
+          Login
+        </button>
+      </span>
     </form>
   );
 };
