@@ -22,7 +22,7 @@ export const register = async (formData: RegisterFormData) => {
 
 export const validateToken = async () => {
   const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`, {
-    credentials: "include",
+    credentials: "include", //tell the browser send the cookie to server, then server will send it back to browser
   });
 
   if (!response.ok) {
