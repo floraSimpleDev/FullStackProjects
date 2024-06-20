@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { FaUniversalAccess } from "react-icons/fa";
-import { RxEnter, RxExit } from "react-icons/rx";
+import { RxEnter } from "react-icons/rx";
 import { useAppContext } from "../contexts/AppContext";
+import SignOutButton from "./SignOutButton";
 
 const Header = () => {
   const { isLoggedIn } = useAppContext();
@@ -16,11 +17,19 @@ const Header = () => {
         <li className="flex space-x-2">
           {isLoggedIn ? (
             <>
-              <Link to="/my-bookings">My Bookings</Link>
-              <Link to="/my-hotels">My Hotels</Link>
-              <button>
-                <RxExit /> &nbsp; Sign out
-              </button>
+              <Link
+                to="/my-bookings"
+                className="flex items-center text-[#f09d7c] px-3 font-bold border border-[#f09d7c] rounded-xl hover:bg-[#f09d7c] hover:text-[#493e99] transition"
+              >
+                Bookings
+              </Link>
+              <Link
+                to="/my-hotels"
+                className="flex items-center text-[#f09d7c] px-3 font-bold border border-[#f09d7c] rounded-xl hover:bg-[#f09d7c] hover:text-[#493e99] transition"
+              >
+                My Hotels
+              </Link>
+              <SignOutButton />
             </>
           ) : (
             <Link
