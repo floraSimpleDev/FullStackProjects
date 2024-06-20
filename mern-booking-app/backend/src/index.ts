@@ -6,7 +6,15 @@ import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
 import cookieParser from "cookie-parser";
 
-mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string);
+//connect mongodb database, and display which database is connecting now
+mongoose
+  .connect(process.env.MONGODB_CONNECTION_STRING as string)
+  .then(() =>
+    console.log(
+      "Connected to database: ",
+      process.env.MONGODB_CONNECTION_STRING
+    )
+  );
 
 //create an express app, make sure each express API be parsed into JSON type
 const app = express();
