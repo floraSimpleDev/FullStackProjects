@@ -1,8 +1,8 @@
 import { RegisterFormData } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
 
-//import the VITE_API_BASE_URL from frontend .env file
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+//import the VITE_API_BASE_URL from frontend .env file; while using backend express static assets, url will be empty
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
 //register interaction
 export const register = async (formData: RegisterFormData) => {

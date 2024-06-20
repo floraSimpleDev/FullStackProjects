@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
 import cookieParser from "cookie-parser";
+import path from "path";
 
 //connect mongodb database, and display which database is connecting now
 mongoose
@@ -39,6 +40,8 @@ app.use(
   "password": "password1234"
 }
 */
+//post the frontend static page via the backend
+app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
