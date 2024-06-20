@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import * as apiClient from "../api-client";
 import waiting_purple from "../assets/waiting_purple.svg";
+import { useAppContext } from "../contexts/AppContext";
+import { useNavigate } from "react-router-dom";
 
 export type SignInFormData = {
   email: string;
@@ -9,6 +11,10 @@ export type SignInFormData = {
 };
 
 const SignIn = () => {
+  //import the showToast function
+  const { showToast } = useAppContext();
+  const navigate = useNavigate();
+
   const {
     register,
     formState: { errors },
@@ -17,12 +23,14 @@ const SignIn = () => {
 
   const mutation = useMutation(apiClient.signIn, {
     onSuccess: async () => {
-      console.log("user has been signed in");
+      showToast({ message: "Sign in succesful!", type: "SUCCESS" });
 
+      navigate("/");
       //1. show the successful toast; 2. navigate to the home page
     },
     onError: (error: Error) => {
       //show the error toast
+      showToast({ message: error.message, type: "ERROR" });
     },
   });
 
