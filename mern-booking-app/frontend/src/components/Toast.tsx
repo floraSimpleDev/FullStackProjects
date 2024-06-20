@@ -7,11 +7,11 @@ type ToastProps = {
 };
 
 const Toast = ({ message, type, onClose }: ToastProps) => {
-  // toast will be closed after 5 seconds displayed
+  // toast will be closed after 2 seconds displayed
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();
-    }, 3000);
+    }, 2000);
 
     return () => {
       clearTimeout(timer);
