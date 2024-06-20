@@ -73,6 +73,7 @@ router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
 //logout router
 router.post("/logout", (req: Request, res: Response) => {
   res.cookie("auth_token", "", { expires: new Date(0) }); //expired as while as it is created
+  res.send(); // in case of pending
 });
 
 export default router;
