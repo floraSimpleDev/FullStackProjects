@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../api-client";
 import waiting_purple from "../assets/waiting_purple.svg";
 import { useAppContext } from "../contexts/AppContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export type SignInFormData = {
   email: string;
@@ -90,14 +90,20 @@ const SignIn = () => {
           )}
         </label>
 
-        <span className="flex justify-end items-center">
+        <section className="flex justify-between items-center">
+          <span className="text-sm">
+            Not Registered?{" "}
+            <Link to="/register" className="underline">
+              Create an account here
+            </Link>
+          </span>
           <button
             type="submit"
             className="bg-[#493e99] text-[#f09d7c] p-3 font-bold text-lg rounded-xl hover:bg-[#f09d7c] hover:text-[#493e99] transition"
           >
             Login
           </button>
-        </span>
+        </section>
       </form>
     </main>
   );
