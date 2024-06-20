@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../api-client";
 import waiting_purple from "../assets/waiting_purple.svg";
 import { useAppContext } from "../contexts/AppContext";
@@ -14,6 +14,7 @@ const SignIn = () => {
   //import the showToast function
   const { showToast } = useAppContext();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const {
     register,
@@ -24,6 +25,8 @@ const SignIn = () => {
   const mutation = useMutation(apiClient.signIn, {
     onSuccess: async () => {
       showToast({ message: "Sign in succesful!", type: "SUCCESS" });
+      //update the validate token state to keep up at the newest situation
+      await queryClient.invalidateQueries("validateToken");
 
       navigate("/");
       //1. show the successful toast; 2. navigate to the home page
