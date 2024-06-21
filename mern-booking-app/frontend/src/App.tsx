@@ -7,6 +7,7 @@ import {
 import "./App.css";
 import Layout from "./layouts/Layout";
 import Register from "./pages/Register";
+import Second from "./layouts/secondLayout";
 import SignIn from "./pages/SignIn";
 
 function App() {
@@ -34,18 +35,18 @@ function App() {
         <Route
           path="/register"
           element={
-            <Layout>
+            <Second>
               <Register />
-            </Layout>
+            </Second>
           }
         />
 
         <Route
           path="/sign-in"
           element={
-            <Layout>
+            <Second>
               <SignIn />
-            </Layout>
+            </Second>
           }
         />
 
