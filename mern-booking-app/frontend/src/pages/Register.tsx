@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../api-client";
 import { useAppContext } from "../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
+import welcome from "../assets/welcome.svg";
 
 export type RegisterFormData = {
   firstName: string;
@@ -49,121 +50,131 @@ const Register = () => {
 
   //md:flex-row for mobile screen
   return (
-    <form className="flex flex-col gap-5" onSubmit={onSubmit}>
-      <h2 className="text-3xl font-bold md:font-normal sm:text-sm sm:font-normal">
-        Create an Account
-      </h2>
-      <section className="flex flex-row md:flex-col sm:flex-col gap-5">
+    <section className="flex justify-between">
+      <form
+        className="flex flex-col gap-5 w-3/5 md:w-full sm:w-full"
+        onSubmit={onSubmit}
+      >
+        <h2 className="text-3xl font-bold md:font-normal sm:text-sm sm:font-normal">
+          Create an Account
+        </h2>
+        <section className="flex flex-row md:flex-col sm:flex-col gap-5">
+          <label
+            htmlFor="firstName"
+            className="text-gray-700 text-sm font-bold flex-1  md:font-normal sm:text-sm sm:font-normal"
+          >
+            First Name
+            <input
+              className="border rounded w-full py-1 px-2 font-normal"
+              type="text"
+              autoComplete="off"
+              id="firstName"
+              {...register("firstName", {
+                required: "This field is required",
+              })}
+            />
+            {errors.firstName && (
+              <span className="text-red-400">{errors.firstName.message}</span>
+            )}
+          </label>
+
+          <label
+            htmlFor="lastName"
+            className="text-gray-700 text-sm font-bold flex-1  md:font-normal sm:text-sm sm:font-normal"
+          >
+            Last Name
+            <input
+              className="border rounded w-full py-1 px-2 font-normal"
+              type="text"
+              autoComplete="off"
+              id="lastName"
+              {...register("lastName", { required: "This field is required" })}
+            />
+            {errors.lastName && (
+              <span className="text-red-400">{errors.lastName.message}</span>
+            )}
+          </label>
+        </section>
+
         <label
-          htmlFor="firstName"
+          htmlFor="email"
           className="text-gray-700 text-sm font-bold flex-1  md:font-normal sm:text-sm sm:font-normal"
         >
-          First Name
+          Email
           <input
             className="border rounded w-full py-1 px-2 font-normal"
-            type="text"
+            type="email"
             autoComplete="off"
-            id="firstName"
-            {...register("firstName", {
+            id="email"
+            {...register("email", { required: "This field is required" })}
+          />
+          {errors.email && (
+            <span className="text-red-400">{errors.email.message}</span>
+          )}
+        </label>
+
+        <label
+          htmlFor="password"
+          className="text-gray-700 text-sm font-bold flex-1  md:font-normal sm:text-sm sm:font-normal"
+        >
+          Password
+          <input
+            className="border rounded w-full py-1 px-2 font-normal"
+            type="password"
+            autoComplete="off"
+            id="password"
+            {...register("password", {
               required: "This field is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters",
+              },
             })}
           />
-          {errors.firstName && (
-            <span className="text-red-400">{errors.firstName.message}</span>
+          {errors.password && (
+            <span className="text-red-400">{errors.password.message}</span>
           )}
         </label>
 
         <label
-          htmlFor="lastName"
+          htmlFor="confirm-password"
           className="text-gray-700 text-sm font-bold flex-1  md:font-normal sm:text-sm sm:font-normal"
         >
-          Last Name
+          Confirm Password
           <input
             className="border rounded w-full py-1 px-2 font-normal"
-            type="text"
+            type="password"
             autoComplete="off"
-            id="lastName"
-            {...register("lastName", { required: "This field is required" })}
+            id="confirm-password"
+            {...register("confirmPassword", {
+              validate: (val) => {
+                if (!val) {
+                  return "This field is required";
+                } else if (watch("password") !== val) {
+                  return "Your passwords do not match";
+                }
+              },
+            })}
           />
-          {errors.lastName && (
-            <span className="text-red-400">{errors.lastName.message}</span>
+          {errors.confirmPassword && (
+            <span className="text-red-400">
+              {errors.confirmPassword.message}
+            </span>
           )}
         </label>
-      </section>
-
-      <label
-        htmlFor="email"
-        className="text-gray-700 text-sm font-bold flex-1  md:font-normal sm:text-sm sm:font-normal"
-      >
-        Email
-        <input
-          className="border rounded w-full py-1 px-2 font-normal"
-          type="email"
-          autoComplete="off"
-          id="email"
-          {...register("email", { required: "This field is required" })}
-        />
-        {errors.email && (
-          <span className="text-red-400">{errors.email.message}</span>
-        )}
-      </label>
-
-      <label
-        htmlFor="password"
-        className="text-gray-700 text-sm font-bold flex-1  md:font-normal sm:text-sm sm:font-normal"
-      >
-        Password
-        <input
-          className="border rounded w-full py-1 px-2 font-normal"
-          type="password"
-          autoComplete="off"
-          id="password"
-          {...register("password", {
-            required: "This field is required",
-            minLength: {
-              value: 6,
-              message: "Password must be at least 6 characters",
-            },
-          })}
-        />
-        {errors.password && (
-          <span className="text-red-400">{errors.password.message}</span>
-        )}
-      </label>
-
-      <label
-        htmlFor="confirm-password"
-        className="text-gray-700 text-sm font-bold flex-1  md:font-normal sm:text-sm sm:font-normal"
-      >
-        Confirm Password
-        <input
-          className="border rounded w-full py-1 px-2 font-normal"
-          type="password"
-          autoComplete="off"
-          id="confirm-password"
-          {...register("confirmPassword", {
-            validate: (val) => {
-              if (!val) {
-                return "This field is required";
-              } else if (watch("password") !== val) {
-                return "Your passwords do not match";
-              }
-            },
-          })}
-        />
-        {errors.confirmPassword && (
-          <span className="text-red-400">{errors.confirmPassword.message}</span>
-        )}
-      </label>
-      <span className="flex justify-end items-center">
-        <button
-          type="submit"
-          className="bg-[#493e99] text-[#f09d7c] p-3 font-bold text-lg rounded-xl hover:bg-[#f09d7c] hover:text-[#493e99] transition"
-        >
-          Create Account
-        </button>
-      </span>
-    </form>
+        <span className="flex justify-end items-center">
+          <button
+            type="submit"
+            className="bg-[#493e99] text-[#f09d7c] p-3 font-bold text-lg rounded-xl hover:bg-[#f09d7c] hover:text-[#493e99] transition"
+          >
+            Create Account
+          </button>
+        </span>
+      </form>
+      <figure className="flex w-1/4  md:hidden sm:hidden">
+        <img src={welcome} alt="welcome to register" />
+      </figure>
+    </section>
   );
 };
 

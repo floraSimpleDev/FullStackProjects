@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../api-client";
 import waiting_purple from "../assets/waiting_purple.svg";
 import { useAppContext } from "../contexts/AppContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export type SignInFormData = {
   email: string;
@@ -15,6 +15,8 @@ const SignIn = () => {
   const { showToast } = useAppContext();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+
+  const location = useLocation();
 
   const {
     register,
@@ -28,7 +30,7 @@ const SignIn = () => {
       //update the validate token state to keep up at the newest situation
       await queryClient.invalidateQueries("validateToken");
 
-      navigate("/");
+      navigate(location.state?.from?.pathname || "/");
       //1. show the successful toast; 2. navigate to the home page
     },
     onError: (error: Error) => {
@@ -42,7 +44,7 @@ const SignIn = () => {
   });
 
   return (
-    <main className="flex justify-between items-center md:flex-col-reverse">
+    <section className="flex justify-between items-center md:flex-col-reverse">
       <figure className="w-1/3 md:w-4/5 sm:hidden">
         <img src={waiting_purple} alt="loging page figure" className="w-full" />
       </figure>
@@ -105,7 +107,7 @@ const SignIn = () => {
           </button>
         </section>
       </form>
-    </main>
+    </section>
   );
 };
 
