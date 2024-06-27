@@ -1,7 +1,8 @@
 import { RegisterFormData } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
 
-//import the VITE_API_BASE_URL from frontend .env file; while using backend express static assets, url will be empty
+/* import the VITE_API_BASE_URL from frontend .env file; 
+   while using backend express static assets, url will be empty */
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
 //register interaction
@@ -63,4 +64,19 @@ export const signOut = async () => {
   if (!response.ok) {
     throw new Error("Error during sign out");
   }
+};
+
+export const addMyHotel = async (hotelFormData: FormData) => {
+  // post hotelFormData to /my-hotels page
+  const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
+    method: "POST",
+    credentials: "include",
+    body: hotelFormData,
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to add hotel");
+  }
+
+  return response.json();
 };
