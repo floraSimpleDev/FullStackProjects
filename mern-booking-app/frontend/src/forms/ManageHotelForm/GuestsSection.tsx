@@ -20,11 +20,14 @@ const GuestsSection = () => {
             className="border rounded w-full py-2 px-3 font-normal text-gray-700"
             {...register("adultCount", { required: "This field is required" })}
           />
-          {errors.adultCount?.message && (
-            <span className="text-red-400 text-sm font-bold">
-              {errors.adultCount?.message}
-            </span>
-          )}
+          {
+            //if errors.adultCount exists
+            errors.adultCount?.message && (
+              <span className="text-red-400 text-sm font-bold">
+                {errors.adultCount?.message}
+              </span>
+            )
+          }
         </label>
         <label className="text-white text-sm font-semibold">
           Children
@@ -35,11 +38,14 @@ const GuestsSection = () => {
             className="border rounded w-full py-2 px-3 font-normal text-gray-700"
             {...register("childCount", { required: "This field is required" })}
           />
-          {errors.childCount?.message && (
-            <span className="text-red-400 text-sm font-bold">
-              {errors.childCount?.message}
-            </span>
-          )}
+          {
+            //if errors.childCount exists
+            errors.childCount?.message && (
+              <span className="text-red-400 text-sm font-bold">
+                {errors.childCount?.message}
+              </span>
+            )
+          }
         </label>
       </section>
     </section>
