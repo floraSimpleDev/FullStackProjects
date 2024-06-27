@@ -1,5 +1,6 @@
 import { FormProvider, useForm } from "react-hook-form";
 import DetailsSection from "./DetailsSection";
+import TypeSection from "./TypeSection";
 
 export type HotelFormData = {
   name: string;
@@ -20,8 +21,9 @@ const ManageHotelForm = () => {
   return (
     <main className="border-[#493e99] border rounded-xl">
       <FormProvider {...formMethods}>
-        <form className="px-40 py-10">
+        <form className="flex flex-col gap-10 px-40 py-10">
           <DetailsSection />
+          <TypeSection />
         </form>
       </FormProvider>
     </main>
