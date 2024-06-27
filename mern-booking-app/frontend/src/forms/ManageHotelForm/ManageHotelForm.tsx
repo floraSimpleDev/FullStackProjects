@@ -50,6 +50,9 @@ const ManageHotelForm = ({ onSave, isLoading }: Props) => {
     Array.from(formDataJson.imageFiles).forEach((imageFile) => {
       formData.append("imageFiles", imageFile);
     });
+
+    // save formData
+    onSave(formData);
   });
 
   return (
@@ -64,10 +67,11 @@ const ManageHotelForm = ({ onSave, isLoading }: Props) => {
           <ImagesSection />
           <section className="flex justify-end">
             <button
+              disabled={isLoading} /* cannot save while loading */
               type="submit"
-              className="bg-[#493e99] text-white p-2 px-4 rounded-md font-bold hover:bg-[#2e2e7b]"
+              className="bg-[#493e99] text-white p-2 px-4 rounded-md font-bold hover:bg-[#2e2e7b] disabled:bg-gray-500"
             >
-              Save
+              {isLoading ? "Saving..." : "Save"}
             </button>
           </section>
         </form>
