@@ -19,8 +19,8 @@ const TypeSection = () => {
           <label
             className={
               typeWatch === type
-                ? "cursor-pointer bg-[#493e99] text-[#f09d7c] text-sm rounded-full px-4 py-2 font-semibold"
-                : "cursor-pointer bg-[#f09d7c] text-[#493e99] text-sm rounded-full px-4 py-2 font-semibold"
+                ? "cursor-pointer bg-[#f09d7c] text-[#493e99] text-sm rounded-full px-4 py-2 font-semibold"
+                : "cursor-pointer bg-[#493e99] text-white text-sm rounded-full px-4 py-2 font-semibold"
             }
           >
             <input
