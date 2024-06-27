@@ -23,7 +23,20 @@ const ManageHotelForm = () => {
   const formMethods = useForm<HotelFormData>();
   const { handleSubmit } = formMethods;
 
-  const onSubmit = handleSubmit(() => {});
+  const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
+    // create new FormData object & call our API
+    const formData = new FormData();
+
+    formData.append("name", formDataJson.name);
+    formData.append("city", formDataJson.city);
+    formData.append("country", formDataJson.country);
+    formData.append("description", formDataJson.description);
+    formData.append("type", formDataJson.type);
+    formData.append("pricePerNight", formDataJson.pricePerNight.toString());
+    formData.append("starRating", formDataJson.starRating.toString());
+    formData.append("adultCount", formDataJson.adultCount.toString());
+    formData.append("childCount", formDataJson.childCount.toString());
+  });
 
   return (
     <main className="border-[#493e99] border rounded-xl">
