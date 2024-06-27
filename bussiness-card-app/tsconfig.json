@@ -26,7 +26,7 @@
     /* Path Aliases */
     "baseUrl": ".",
     "paths": {
-      "react-query react-dom/*": ["./src/*"]
+      "~/*": ["./src/*"]
     }
   },
   "include": [
