@@ -15,7 +15,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex h-[calc(100vh-4rem)] flex-col justify-center bg-gradient-to-br from-[#d299c2] to-[#fef9d7]">
+      <main className="flex h-[calc(100vh-4rem)] flex-col items-center justify-center bg-gradient-to-br from-[#d299c2] to-[#fef9d7]">
         {!sessionData && (
           <button className="flex justify-center items-center gap-4 rounded-full bg-black/10 px-10 py-3 no-underline font-semibold text-black transition hover:bg-black/20">
             <img
