@@ -48,3 +48,5 @@ test("should allow the user to register", async ({ page }) => {
   await expect(page.getByRole("link", { name: "My Hotels" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Sign Out" })).toBeVisible();
 });
+
+//cd frontend: npm run dev, backend: npm run e2e

@@ -33,7 +33,7 @@ const DetailsSection = () => {
           <input
             type="text"
             autoComplete="off"
-            id="name"
+            id="city"
             className="border rounded w-full py-1 px-2 font-normal"
             {...register("city", { required: "This field is required" })}
           />
@@ -50,7 +50,7 @@ const DetailsSection = () => {
           <input
             type="text"
             autoComplete="off"
-            id="name"
+            id="country"
             className="border rounded w-full py-1 px-2 font-normal"
             {...register("country", { required: "This field is required" })}
           />
@@ -85,7 +85,7 @@ const DetailsSection = () => {
           min={1}
           id="pricePerNight"
           className="border rounded w-full py-1 px-2 font-normal"
-          {...register("country", { required: "This field is required" })}
+          {...register("pricePerNight", { required: "This field is required" })}
         />
         {errors.pricePerNight && (
           <span className="text-red-400">{errors.pricePerNight.message}</span>

@@ -10,7 +10,9 @@ const router = express.Router();
 const storage = multer.memoryStorage();
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, //5MB
+  limits: {
+    fileSize: 5 * 1024 * 1024, // 5MB
+  },
 });
 
 // api/my-hotels
@@ -26,7 +28,7 @@ router.post(
     body("pricePerNight")
       .notEmpty()
       .isNumeric()
-      .withMessage("Price per night is required and must be number"),
+      .withMessage("Price per night is required and must be a number"),
     body("facilities")
       .notEmpty()
       .isArray()
@@ -61,7 +63,7 @@ router.post(
       //4. return a 201 status code
       res.status(201).send(hotel);
     } catch (error) {
-      console.log("Error creating hotel: ", error);
+      console.log(error);
       res.status(500).json({ message: "Something went wrong" });
     }
   }
