@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import * as apiClient from "../api-client";
 import { BsBuilding, BsMap } from "react-icons/bs";
 import { BiHotel, BiMoney, BiStar } from "react-icons/bi";
+import { HotelType } from "../../../backend/src/models/hotel";
 
 const MyHotels = () => {
   const { data: hotelData } = useQuery(
@@ -30,7 +31,7 @@ const MyHotels = () => {
       </span>
 
       <section className="grid grid-cols-1 gap-8">
-        {hotelData.map((hotel) => (
+        {hotelData.map((hotel: HotelType) => (
           <section
             key={hotel._id}
             className="flex flex-col justify-between border border-[#493e99] rounded-lg p-8 gap-5"
