@@ -5,12 +5,20 @@ const ImagesSection = () => {
   const {
     register,
     formState: { errors },
+    watch,
   } = useFormContext<HotelFormData>();
+
+  const existingImageUrls = watch("imageUrls");
 
   return (
     <section>
       <h2 className="text-2xl font-bold mb-3">Images</h2>
       <section className="border rounded p-4 flex flex-col gap-4">
+        {existingImageUrls && (
+          <section className="grid grid-cols-6 gap-4">
+            {existingImageUrls}
+          </section>
+        )}
         <input
           type="file"
           multiple //add multiple images
