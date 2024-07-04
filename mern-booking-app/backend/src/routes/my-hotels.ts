@@ -42,7 +42,7 @@ router.post(
       const imageFiles = req.files as Express.Multer.File[];
       const newHotel: HotelType = req.body;
 
-      const imageUrls = uploadImages(imageFiles);
+      const imageUrls = await uploadImages(imageFiles);
 
       newHotel.imageUrls = imageUrls;
       newHotel.lastUpdated = new Date();
