@@ -42,17 +42,8 @@ router.post(
       const imageFiles = req.files as Express.Multer.File[];
       const newHotel: HotelType = req.body;
 
-      //1. upload the images to cloudinary
-      const uploadPromises = imageFiles.map(async (image) => {
-        const b64 = Buffer.from(image.buffer).toString("base64");
-        let dataURL = "data:" + image.mimetype + ";base64," + b64;
-        const res = await cloudinary.v2.uploader.upload(dataURL);
+      const imageUrls = uploadImages(imageFiles);
 
-        return res.url;
-      });
-
-      //2. if upload was successful, add the URLS to the new hotel
-      const imageUrls = await Promise.all(uploadPromises);
       newHotel.imageUrls = imageUrls;
       newHotel.lastUpdated = new Date();
       newHotel.userId = req.userId;
@@ -94,5 +85,52 @@ router.get("/:id", verifyToken, async (req: Request, res: Response) => {
     res.status(500).json({ message: "Error fetching hotels" });
   }
 });
+
+// while image url changed, put the new imageFiles list to the hotelId page
+router.put(
+  "/:hotelId",
+  verifyToken,
+  upload.array("imageFiles"),
+  async (req: Request, res: Response) => {
+    try {
+      const updateHotel: HotelType = req.body;
+      updateHotel.lastUpdated = new Date();
+
+      // get most updated hotel data
+      const hotel = await Hotel.findOneAndUpdate(
+        {
+          _id: req.params.hotelId,
+          userId: req.userId,
+        },
+        updateHotel,
+        { new: true } //provide the new version of data
+      );
+
+      if (!hotel) {
+        return res.status(404).json({ message: "Hotel not found" });
+      }
+
+      const files = req.files as Express.Multer.File[];
+      const updatedImageUrls = await uploadImages(files);
+    } catch (error) {
+      res.status(500).json({ message: "Something went wrong" });
+    }
+  }
+);
+
+async function uploadImages(imageFiles: Express.Multer.File[]) {
+  //1. upload the images to cloudinary
+  const uploadPromises = imageFiles.map(async (image) => {
+    const b64 = Buffer.from(image.buffer).toString("base64");
+    let dataURL = "data:" + image.mimetype + ";base64," + b64;
+    const res = await cloudinary.v2.uploader.upload(dataURL);
+
+    return res.url;
+  });
+
+  //2. if upload was successful, add the URLS to the new hotel
+  const imageUrls = await Promise.all(uploadPromises);
+  return imageUrls;
+}
 
 export default router;
