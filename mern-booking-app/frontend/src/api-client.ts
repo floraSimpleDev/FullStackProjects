@@ -6,7 +6,7 @@ import { SignInFormData } from "./pages/SignIn";
    while using backend express static assets, url will be empty */
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
-//register interaction
+//register interaction, use POST to create a new resource on the server end
 export const register = async (formData: RegisterFormData) => {
   const response = await fetch(`${API_BASE_URL}/api/users/register`, {
     method: "POST",
@@ -24,7 +24,7 @@ export const register = async (formData: RegisterFormData) => {
   }
 };
 
-//sign in interaction
+//sign in interaction, use POST to create a new resource on the server end
 export const signIn = async (formData: SignInFormData) => {
   const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
     method: "POST",
@@ -67,6 +67,7 @@ export const signOut = async () => {
   }
 };
 
+// use POST to create a new resource on the server end
 export const addMyHotel = async (hotelFormData: FormData) => {
   // post hotelFormData to /my-hotels page
   const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
@@ -107,6 +108,7 @@ export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => {
   return response.json();
 };
 
+// use PUT to update resource on the server end
 export const updateMyHotelById = async (hotelFormData: FormData) => {
   const response = await fetch(
     `${API_BASE_URL}/api/my-hotels/${hotelFormData.get("hotelId")}`,
