@@ -12,10 +12,23 @@ const EditHotel = () => {
     "fetchMyHotelById",
     () => apiClient.fetchMyHotelById(hotelId || ""),
     {
-      //it converts the value to boolean - so if it has non-zero it's true, else false
+      //it converts the value to boolean - so if hotelId has non-zero value it'll be true, else false
       enabled: !!hotelId,
     }
   );
+
+  const { mutate, isLoading } = useMutation(apiClient.updateMyHotelById, {
+    onSuccess: () => {
+      showToast({ message: "Hotel Sved!", type: "SUCCESS" });
+    },
+    onError: () => {
+      showToast({ message: "Error Saving Hotel", type: "ERROR" });
+    },
+  });
+
+  const handleSave = (hotelFormData: FormData) => {
+    mutate(hotelFormData);
+  };
 
   return (
     <ManageHotelForm hotel={hotel} onSave={handleSave} isLoading={isLoading} />
