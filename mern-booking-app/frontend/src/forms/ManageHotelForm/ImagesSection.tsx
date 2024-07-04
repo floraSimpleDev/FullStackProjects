@@ -16,7 +16,18 @@ const ImagesSection = () => {
       <section className="border rounded p-4 flex flex-col gap-4">
         {existingImageUrls && (
           <section className="grid grid-cols-6 gap-4">
-            {existingImageUrls}
+            {existingImageUrls.map((url, index) => (
+              <section key={index} className="relative group">
+                <img
+                  src={url}
+                  alt="hotel image"
+                  className="min-h-full object-cover"
+                />
+                <button className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 text-white">
+                  Delete
+                </button>
+              </section>
+            ))}
           </section>
         )}
         <input
