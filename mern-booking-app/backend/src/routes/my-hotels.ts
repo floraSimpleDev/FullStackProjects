@@ -112,6 +112,11 @@ router.put(
 
       const files = req.files as Express.Multer.File[];
       const updatedImageUrls = await uploadImages(files);
+
+      hotel.imageUrls = [...updatedImageUrls, ...(updateHotel.imageUrls || [])];
+
+      await hotel.save();
+      res.status(201).json(hotel);
     } catch (error) {
       res.status(500).json({ message: "Something went wrong" });
     }
