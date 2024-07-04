@@ -59,11 +59,12 @@ const ManageHotelForm = ({ hotel, onSave, isLoading }: Props) => {
       formData.append(`facilities[${index}]`, facility);
     });
 
-    /* if (formDataJson.imageUrls) {
+    // overwrite the old imageUrls list
+    if (formDataJson.imageUrls) {
       formDataJson.imageUrls.forEach((url, index) => {
         formData.append(`imageUrls[${index}]`, url);
       });
-    } */
+    }
 
     Array.from(formDataJson.imageFiles).forEach((imageFile) => {
       formData.append(`imageFiles`, imageFile);
