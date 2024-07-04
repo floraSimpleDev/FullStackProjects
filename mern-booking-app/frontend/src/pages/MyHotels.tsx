@@ -31,7 +31,7 @@ const MyHotels = () => {
       </span>
 
       <section className="grid grid-cols-1 gap-8">
-        {Array(hotelData).map((hotel: HotelType) => (
+        {hotelData.map((hotel) => (
           <section
             key={hotel._id}
             data-testid="hotel-card"
