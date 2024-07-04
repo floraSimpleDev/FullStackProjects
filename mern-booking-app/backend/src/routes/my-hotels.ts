@@ -84,7 +84,7 @@ router.get("/", verifyToken, async (req: Request, res: Response) => {
 router.get("/:id", verifyToken, async (req: Request, res: Response) => {
   const id = req.params.id.toString();
   try {
-    // return single hotel object
+    // return single hotel info object into the view detail form
     const hotel = await Hotel.findOne({
       _id: id,
       userId: req.userId,
